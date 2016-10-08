@@ -1,0 +1,204 @@
+    <!DOCTYPE html>
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript">
+            
+        </script>
+        <title></title>
+        <style type="text/css">
+        
+            
+
+            input[type=text] {
+                border-color: #d9d9d9;
+            }
+        
+    ul{
+    list-style: none;
+    padding-left: 0em;
+    margin: 0em;
+    }
+
+    .button-3{
+    text-align: center;
+    }
+
+    .button-3 li{
+    display: inline-block;
+        width: 121px;
+        max-width: 201px;
+        height: 5em;
+        padding-top: 2em;
+        padding-bottom: 3em;
+        margin-bottom: 1px;
+    }
+    .last{
+    clear: left;
+    }
+    .first{
+    clear: right;
+    background-color:black;
+    }
+    #numberDisplay input{
+    height: 2em;
+    text-align: center;
+    /*background: rgba(0, 0, 255, 0.1);*/
+    padding: .5em 0em;
+    margin-top: 0em;
+        margin-bottom: 0%;
+    font-size: 2em;
+    font-family: "Helvetica Neue";
+    font-weight: bolder;
+    width: 100%;
+    border: 0px;
+    }
+
+    #actions .call.ready{
+    background: rgba(0, 255, 0, 0.2);
+    }
+    #actions .call.ready:hover{
+    background: rgba(0, 255, 0, 0.4);
+    }
+    #actions .skip.ready{
+    background: rgba(0, 255, 0, 0.2);
+    }
+    #actions .skip.ready:hover{
+    background: rgba(0, 255, 0, 0.4);
+    }
+    #actions .clear.ready{
+    background: rgba(255, 0, 0, 0.2);
+    }
+    #actions .clear.ready:hover{
+    background: rgba(255, 0, 0, 0.4);
+    }
+    #actions .deactive{
+    opacity: 1;
+    }
+
+    #dialpad,
+    #actions,
+    #numberDisplay{
+    max-width: 380px;
+    margin: 0 auto;
+    }
+    #dialpad.deactive{
+    opacity: 1;
+    }
+    #dialpad.deactive li:hover,
+    #actions li.deactive:hover{
+    background: #eee;
+    }
+    #dialpad li{
+    font-weight: bold;
+    background: #1d1918;
+    width: 121px;
+        height: 40%;
+    }
+    #dialpad li:hover{
+    background: #ccc;
+    }
+    #actions li{
+    background: #1d1918;
+    opacity: 1;
+    }
+    #actions li:hover{
+    background: #ccc;
+    }
+
+    /*.label-Editable:hover{
+    background-image: linear-gradient(#90d5d0, #3ea49d) !Important;
+    opacity: 1;
+    color:white;
+    }*/
+
+        </style>
+    </head>
+    <body>
+    <div id="wrapper">
+                        <div id="phone">
+                            <div id="numberDisplay">
+                                <input id="displayBox" type="text" style="border:2px solid grey"/>
+                            </div>
+                            <div id="dialpad" class="button-3" style="color: white;cursor:pointer;">
+                                <ul>
+                                    <li class="first" onclick="getValue(1)">1</li>
+                                    <li onclick="getValue(2)">2</li>
+                                    <li class="last" onclick="getValue(3)">3</li>
+                                    <li class="first" onclick="getValue(4)">4</li>
+                                    <li onclick="getValue(5)">5</li>
+                                    <li class="last" onclick="getValue(6)">6</li>
+                                    <li class="first" onclick="getValue(7)">7</li>
+                                    <li onclick="getValue(8)">8</li>
+                                    <li class="last" onclick="getValue(9)">9</li>
+                                </ul> 
+                            </div>
+                            <div id="actions" class="button-3 deactive" style="cursor:pointer;">
+                                <ul>
+                                    <li class="call" style="background-color: #009933;padding-top: 15px;"><i class="fa fa-phone" aria-hidden="true" style="font-size: 30px;margin-left: -26px;color: white;"></i>
+                                        <a href="skype:+91?call" id="liCallSkype" style="font-size: x-large;color: white;padding-left:0px;">Call</a></li>
+                                    <li onclick="getValue(0)" style="color: white;padding-top: 29px"><label style="font-size:15px;margin-left:7px;">0</label></li>
+                                    <li href="" onclick="skipNum()" class="skip" style="color: white;padding-top: 19px;cursor:pointer;"><i class="fa fa-arrow-left" aria-hidden="true" style="font-size: 27px;margin-left: -26px;"></i><label>Skip</label></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+    </body>
+                    <script type="text/javascript">
+            $(document).ready(function () { 
+                $("#displayBox").blur(function () {
+                    
+                    var txtValue = document.getElementById("displayBox").value;
+                    var concattxtValue = "skype:+91" + txtValue+ "?call"
+                    $("#liCallSkype").attr("href", concattxtValue);
+                });
+                $("#dialpad").click(function () { 
+                    var txtValue = document.getElementById("displayBox").value;
+                    var concattxtValue = "skype:+91" + txtValue + "?call"
+                    $("#liCallSkype").attr("href", concattxtValue);
+                });
+                $("#dialpad").mouseenter(function () {
+                    var txtValue = document.getElementById("displayBox").value;
+                    var concattxtValue = "skype:+91" + txtValue + "?call"
+                    $("#liCallSkype").attr("href", concattxtValue);
+                });
+            });
+            function editDisplay(e) {
+                document.getElementById("Input").value += e;
+            }
+            
+            function editHrefForSkype() {
+                var txtValue = document.getElementById("Input").value;
+                var concattxtValue = "skype:+91"+txtValue+"?call"
+                $("#skypehref").attr("href", concattxtValue);
+            }
+            function getValue(number) {
+                document.getElementById("displayBox").value += number;
+            }
+            function deleteNum() {
+                document.getElementById("displayBox").value = '';
+            }
+            function skipNum() {
+                var number = document.getElementById("displayBox").value;
+                var stringLength = number.length;
+                var newNum = number.slice(0, stringLength-1);
+                document.getElementById("displayBox").value = newNum
+            }
+            function skypeCallNum() {
+                var txtValue = document.getElementById("displayBox").value;
+                var concattxtValue = "skype:+1" + txtValue + "?call"
+                $("#liCallSkype").attr("href", concattxtValue);
+            }
+        </script>
+    </html>
